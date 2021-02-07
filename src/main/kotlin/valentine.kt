@@ -1,9 +1,11 @@
 import kotlinx.browser.document
+import kotlinx.html.TagConsumer
 import kotlinx.html.dom.append
 import kotlinx.html.js.table
 import kotlinx.html.js.tbody
 import kotlinx.html.js.td
 import kotlinx.html.js.tr
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.Node
 import kotlin.math.ceil
@@ -13,25 +15,32 @@ const val plainText = "Lorem ipsum etcetera"
 const val valentineTitle = "Krásného Valentýna"
 
 fun Node.card(msg: String) {
-    val text = msg.replace(" ", "")
+    val text = msg.replace(Regex("[\\W]"), "")
     val rows = ceil(sqrt(text.length.toDouble())).toInt()
     val cols = ceil(text.length.toDouble() / rows).toInt()
-    val content = text.toCharArray()
     console.log("rows = $rows, cols = $cols")
-    var index: Int
-    var value: Char
 
     append {
-        table(classes = "table table-borderless") {
-            tbody {
-                for (row in 0 until rows) {
-                    tr {
-                        for (col in 0 until cols) {
-                            td {
-                                index = row * cols + col
-                                value = if (index < content.size) content[index] else ' '
-                                text(value.toString())
-                            }
+        renderTable(rows, cols, text)
+    }
+}
+
+private fun TagConsumer<HTMLElement>.renderTable(
+    rows: Int,
+    cols: Int,
+    content: String
+) {
+    var index: Int
+    var value:Char
+    table(classes = "table table-borderless") {
+        tbody {
+            for (row in 0 until rows) {
+                tr {
+                    for (col in 0 until cols) {
+                        td {
+                            index = row * cols + col
+                            value = if (index < content.length) content[index] else ' '
+                            text(value.toString())
                         }
                     }
                 }

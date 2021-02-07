@@ -1,0 +1,78 @@
+body {
+    background: rgb(252, 70, 114);
+    background: radial-gradient(circle, rgb(252, 70, 114) 0%, rgba(250, 0, 0, 1) 100%);
+    color: white;
+}
+
+//h1 {
+//    font-size: 4rem;
+//    margin: 4rem 0;
+//}
+
+.content {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.countdown {
+    text-align: center;
+}
+
+.bt {
+    border: white solid 1px;
+    border-radius: 25px;
+    background-color: rgba(255, 0, 0, 0.5);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 1.5rem 1.5rem;
+    font-size: 3rem;
+}
+
+.bt:hover {
+    cursor: pointer;
+}
+
+//.disabled {
+//    pointer-events: none;
+//    cursor: default;
+//    opacity: 0.6;
+//}
+
+.table {
+    color: white;
+}
+
+.heart {
+    background-color: red;
+    display: inline-block;
+    height: 30px;
+    margin: 0 10px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+    width: 30px;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    background-color: red;
+    border-radius: 50%;
+    height: 30px;
+    position: absolute;
+    width: 30px;
+}
+
+.heart:before {
+    top: -15px;
+    left: 0;
+}
+
+.heart:after {
+    left: 15px;
+    top: 0;
+}
