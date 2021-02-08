@@ -32,7 +32,7 @@ private fun TagConsumer<HTMLElement>.renderTable(
 ) {
     var index: Int
     var value:Char
-    table(classes = "table table-borderless") {
+    table(classes = "table table-bordered") {
         tbody {
             for (row in 0 until rows) {
                 tr {
