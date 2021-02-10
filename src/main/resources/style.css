@@ -74,6 +74,10 @@ table {
     color: white;
 }
 
+.popover-header {
+    color: red;
+}
+
 .heart {
     background-color: red;
     display: inline-block;
