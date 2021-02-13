@@ -4,14 +4,6 @@ body {
     color: white;
 }
 
-//h1 {
-//    font-size: 4rem;
-//    margin: 4rem 0;
-//}
-
-table {
-    text-align: center;
-}
 .content {
     display: flex;
     flex-flow: wrap;
@@ -64,14 +56,10 @@ table {
     text-align: center;
 }
 
-//.disabled {
-//    pointer-events: none;
-//    cursor: default;
-//    opacity: 0.6;
-//}
-
 .table {
     color: white;
+    text-align: center;
+    font-weight: bold;
 }
 
 .popover-header {

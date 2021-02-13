@@ -11,35 +11,46 @@ import org.w3c.dom.Node
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-const val plainText = "Lorem ipsum etcetera"
 const val valentineTitle = "Krásného Valentýna"
+const val baseOrder = 'A'.toInt()
 
-fun Node.card(msg: String) {
-    val text = msg.replace(Regex("[\\W]"), "")
+fun Node.card(msg: String, inputKeySelector: String = "") {
+//    val text = msg.replace(Regex("[\\W]"), "")
+    val text = msg
     val rows = ceil(sqrt(text.length.toDouble())).toInt()
     val cols = ceil(text.length.toDouble() / rows).toInt()
     console.log("rows = $rows, cols = $cols")
+    console.log("find $inputKeySelector")
+    val key = if (inputKeySelector.isNotBlank()) document.querySelector(inputKeySelector)
+        ?.unsafeCast<HTMLInputElement>()?.value ?: ""
+    else ""
+    console.log("input value: $key")
 
     append {
-        renderTable(rows, cols, text)
+        renderTable(rows, cols, text, key)
     }
 }
 
 private fun TagConsumer<HTMLElement>.renderTable(
     rows: Int,
     cols: Int,
-    content: String
+    content: String,
+    key: String = ""
 ) {
     var index: Int
-    var value:Char
-    table(classes = "table table-bordered") {
+    var value: Char
+
+    table(classes = "table table-borderless") {
         tbody {
             for (row in 0 until rows) {
                 tr {
                     for (col in 0 until cols) {
                         td {
                             index = row * cols + col
-                            value = if (index < content.length) content[index] else ' '
+                            value = if (index < content.length) {
+                                if (key.isNotBlank()) content[index].decode(key[index % key.length])
+                                else content[index]
+                            } else ' '
                             text(value.toString())
                         }
                     }
@@ -49,40 +60,10 @@ private fun TagConsumer<HTMLElement>.renderTable(
     }
 }
 
-fun Node.card(inputKeySelector: String, msg: String) {
-    val text = msg.replace(" ", "")
-    val rows = ceil(sqrt(text.length.toDouble())).toInt()
-    val cols = ceil(text.length.toDouble() / rows).toInt()
-    console.log("rows = $rows, cols = $cols")
-    val content = text.toCharArray()
-    console.log("find $inputKeySelector")
-    val key = document.querySelector(inputKeySelector)?.unsafeCast<HTMLInputElement>()?.value ?: ""
-    console.log("input value: $key")
-    var index: Int
+private fun Char.decode(s: Char): Char =
+    if (!isWhitespace()) ((orderValue() - s.orderValue() + 26) % 26 + (baseOrder)).toChar() else this
 
-    append {
-        table(classes = "table table-borderless") {
-            tbody {
-                for (row in 0 until rows) {
-                    tr {
-                        for (col in 0 until cols) {
-                            td {
-                                index = row * cols + col
-                                val value = if (index < content.size && key.isNotBlank())
-                                    content[index].code(key[index % key.length])
-                                else ' '
-                                text(value.toString())
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+private fun Char.code(s: Char): Char =
+    if (!isWhitespace()) ((orderValue() + s.orderValue()) % 26 + (baseOrder)).toChar() else this
 
-private fun Char.code(s: Char): Char {
-    return ((orderValue() + s.orderValue()) % 26 + ('A'.toInt())).toChar()
-}
-
-private fun Char.orderValue() = toUpperCase().toInt() - 'A'.toInt()
+private fun Char.orderValue() = toUpperCase().toInt() - baseOrder
