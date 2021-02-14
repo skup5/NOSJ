@@ -16,18 +16,34 @@
     <title>&#10084; ***</title>
 </head>
 <body>
+<h1 class="text-center">Přání</h1>
 
 <div id="root" class="container">
-    <div id="table"></div>
-    <div id="demo"></div>
-
-    <button class="btn btn-danger btn-lg rounded-circle" data-toggle="popover" title="Nápověda 1"
-            data-content="obsah nápovědy">
-        <i class="far fa-question-circle"></i>
-    </button>
+    <div id="content">
+        <div id="table" class="text-center"></div>
+    </div>
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modalWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-pink">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title" id="modalWindowLabel"></h5>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalWindowContent">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -37,6 +53,8 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 
+<script src="NOSJ.js"></script>
+
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
@@ -44,7 +62,6 @@
 
 </script>
 
-<script src="NOSJ.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,35 @@
+:root {
+    --color-pink: rgb(252, 70, 114);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background: rgb(252, 70, 114);
-    background: radial-gradient(circle, rgb(252, 70, 114) 0%, rgba(250, 0, 0, 1) 100%);
+    background: var(--color-pink);
+    background: radial-gradient(circle, var(--color-pink) 0%, rgba(250, 0, 0, 1) 100%);
     color: white;
+}
+
+input[name="key"], input[name="key"]:focus {
+    max-width: 10em;
+    color: white;
+    background: var(--color-pink);
+}
+
+.input-group-text {
+    background: red;
+    color: white;
+    border-color: white;
+}
+
+.bg-pink {
+  background: var(--color-pink);
+}
+
+.pink {
+    color: var(--color-pink);
 }
 
 .content {
@@ -10,25 +38,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
-}
-
-.countdown {
-    text-align: center;
-}
-
-.bt {
-    border: white solid 1px;
-    border-radius: 25px;
-    background-color: rgba(255, 0, 0, 0.5);
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    padding: 1.5rem 1.5rem;
-    font-size: 3rem;
-}
-
-.bt:hover {
-    cursor: pointer;
 }
 
 .btn-circle.btn-sm {
@@ -56,10 +65,23 @@ body {
     text-align: center;
 }
 
+.btn-help {
+    color: var(--color-pink);
+}
+
 .table {
     color: white;
     text-align: center;
     font-weight: bold;
+    margin: 1rem 0;
+}
+
+.table-bordered {
+    border: var(--color-pink) 5px solid;
+}
+
+.table-bordered td {
+    border: var(--color-pink) 3px solid;
 }
 
 .popover-header {
