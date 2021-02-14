@@ -56,6 +56,9 @@ fun main() {
         }
 
         document.querySelector("h1")?.scrollIntoView()
+
+        js("""$('[data-toggle="popover"]').popover()""")
+
     }
     httpReq.open("GET", "present_simplified.txt", true)
     httpReq.send()
